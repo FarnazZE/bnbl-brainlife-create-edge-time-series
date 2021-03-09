@@ -9,7 +9,7 @@ import h5py
 
 
 # Choosing config file
-configFilename = "config.json"
+configFilename = "config-sample.json"
 argCount = len(sys.argv)
 if(argCount > 1):
     configFilename = sys.argv[1]
@@ -35,7 +35,7 @@ reglabs = np.array(hf.get('regionids')).astype(np.str) #region_ids
 ts = np.array(hf.get('timeseries')) #time series
 
 # z-scored time series
-z = stats.zscore(ts,0)
+z = stats.zscore(ts,1)
 
 
 print("Building edge time series...")
