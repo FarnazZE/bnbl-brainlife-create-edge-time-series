@@ -9,7 +9,7 @@ import h5py
 
 
 # Choosing config file
-configFilename = "config.json"
+configFilename = "config-sample.json"
 argCount = len(sys.argv)
 if(argCount > 1):
     configFilename = sys.argv[1]
