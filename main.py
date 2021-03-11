@@ -35,7 +35,7 @@ reglabs = np.array(hf.get('regionids')).astype(np.str) #region_ids
 ts = np.array(hf.get('timeseries')) #time series
 
 # z-scored time series
-z = stats.zscore(ts,1)
+z = stats.zscore(ts,0)
 
 
 print("Building edge time series...")
