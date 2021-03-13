@@ -39,10 +39,10 @@ z = stats.zscore(ts,0)
 
 
 print("Building edge time series...")
-T, N= ts.shape
+N, T= ts.shape
 u,v = np.where(np.triu(np.ones(N),1))           # get edges
 # element-wise prroduct of time series
-ets = (z[:,u]*z[:,v])
+ets = (z[u,:]*z[v,:])
 edgeids = [edge for edge in zip(u,v)]
 
 hf.close()                            
