@@ -32,9 +32,11 @@ data_file = str(config['timeseries'])
 
 print("Loading time series...")
 
-hf = h5py.File(data_file,'r') #load data 
-reglabs = np.array(hf.get('regionids')).astype(np.str) #region_ids
-ts = np.array(hf.get('timeseries')) #time series
+ts=pd.read_csv('data_file')
+ts=ts['timeseries']
+#hf = h5py.File(data_file,'r') #load data 
+#reglabs = np.array(hf.get('regionids')).astype(np.str) #region_ids
+#ts = np.array(hf.get('timeseries')) #time series
 
 # z-scored time series
 z = stats.zscore(ts,0)
