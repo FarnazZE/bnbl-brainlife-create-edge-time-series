@@ -17,10 +17,12 @@ if(argCount > 1):
     configFilename = sys.argv[1]
 
 # Defining paths
-outputDirectory = "output"
+outputDirectory = "output/csv"
 
 if(not os.path.exists(outputDirectory)):
     os.makedirs(outputDirectory)
+
+outputDirectory1="output"
 
 # Reading config file
 with open(configFilename, "r") as fd:
@@ -44,7 +46,8 @@ T, N= ts.shape
 u,v = np.where(np.triu(np.ones(N),1))           # get edges
 # element-wise prroduct of time series
 ets = (z.iloc[:,u]*z.iloc[:,v])
-edgeids = [edge for edge in zip(columns[u],columns[v])]
+edgeids = {"edgeid":edge for edge in zip(columns[u],columns[v])}
 
 np.savetxt('outputDirectory/edge_timeseries.csv',np.asarray(ets),delimiter=',') 
-np.savetxt('outputDirectory/edge_ids.csv',np.array(edgeids),delimiter=',') 
+with open('edgeids.json', 'w') as outfile:
+    json.dump(outputDirectory1/edgeids, outfile)
