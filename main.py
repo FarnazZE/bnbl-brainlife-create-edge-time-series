@@ -36,6 +36,12 @@ print("Loading time series...")
 timeseriesFilename = config["tsv"]
 
 ts = pd.read_csv(timeseriesFilename,sep="\t")
+
+K = np.sum(ts, axis=1)
+R = (K != 0)
+xR, = np.where(R == 0)
+ts = np.delete(ts, xR, axis=1)
+
 columns=ts.columns
 # z-scored time series
 z = stats.zscore(ts,1)
