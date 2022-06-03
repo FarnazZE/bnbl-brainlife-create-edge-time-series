@@ -1,3 +1,4 @@
 {
-    "timeseries": "data/ts.h5"
+    "tsv": "data/timeseries.tsv.gz",
+    "json": "data/timeseries.json"
 }
