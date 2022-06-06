@@ -51,9 +51,9 @@ print("Building edge time series...")
 T, N= ts.shape
 u,v = np.where(np.triu(np.ones(N),1))           # get edges
 # element-wise prroduct of time series
-ets = (z.iloc[:,u]*z.iloc[:,v])
+ets = (z[:,u]*z[:,v])
 edgeids = {"edgeid":edge for edge in zip(columns[u],columns[v])}
 
-np.savetxt('outputDirectory/edge_timeseries.csv',np.asarray(ets),delimiter=',') 
+np.savetxt('outputDirectory/edge_timeseries.csv',ets,delimiter=',') 
 with open('edgeids.json', 'w') as outfile:
     json.dump(outputDirectory1/edgeids, outfile)
