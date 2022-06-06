@@ -22,7 +22,6 @@ outputDirectory = "output/csv"
 if(not os.path.exists(outputDirectory)):
     os.makedirs(outputDirectory)
 
-outputDirectory1="output"
 
 # Reading config file
 with open(configFilename, "r") as fd:
@@ -37,14 +36,14 @@ timeseriesFilename = config["tsv"]
 
 ts = pd.read_csv(timeseriesFilename,sep="\t")
 
-K = np.sum(ts, axis=1)
-R = (K != 0)
-xR, = np.where(R == 0)
-ts = np.delete(ts, xR, axis=1)
-
+K = np.sum(ts, axis=0)
 columns=ts.columns
+ts=ts.drop(columns[np.where(K == 0)[0]],axis=1)
+
+
+
 # z-scored time series
-z = stats.zscore(ts,1)
+z = stats.zscore(np.asarray(ts),1)
 
 
 print("Building edge time series...")
@@ -52,8 +51,8 @@ T, N= ts.shape
 u,v = np.where(np.triu(np.ones(N),1))           # get edges
 # element-wise prroduct of time series
 ets = (z[:,u]*z[:,v])
-edgeids = {"edgeid":edge for edge in zip(columns[u],columns[v])}
+edgeids = {"edgeid"+str(e):edge for e,edge in enumerate(zip(columns[u],columns[v]))}
 
-np.savetxt('outputDirectory/edge_timeseries.csv',ets,delimiter=',') 
-with open('edgeids.json', 'w') as outfile:
-    json.dump(outputDirectory1/edgeids, outfile)
+np.savetxt('output/csv/edge_timeseries.csv',ets,delimiter=',') 
+with open('output/edgeids.json', 'w') as outfile:
+    json.dump(edgeids,outfile)
