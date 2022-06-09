@@ -35,10 +35,8 @@ print("Loading time series...")
 timeseriesFilename = config["tsv"]
 
 ts = pd.read_csv(timeseriesFilename,sep="\t")
-
-K = np.sum(ts, axis=0)
 columns=ts.columns
-ts=ts.drop(columns[np.where(K == 0)[0]],axis=1)
+
 
 
 
@@ -54,5 +52,5 @@ ets = (z[:,u]*z[:,v])
 edgeids = {"edgeid"+str(e):edge for e,edge in enumerate(zip(columns[u],columns[v]))}
 
 np.savetxt('output/csv/edge_timeseries.csv',ets,delimiter=',') 
-with open('output/edgeids.json', 'w') as outfile:
+with open('output/index.json', 'w') as outfile:
     json.dump(edgeids,outfile)
