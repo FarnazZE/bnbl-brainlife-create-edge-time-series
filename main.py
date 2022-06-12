@@ -52,5 +52,5 @@ ets = (z[:,u]*z[:,v])
 edgeids = {"edgeid"+str(e):edge for e,edge in enumerate(zip(columns[u],columns[v]))}
 
 np.savetxt('output/csv/edge_timeseries.csv',ets,delimiter=',') 
-with open('output/index.json', 'w') as outfile:
+with open('output/label.json', 'w') as outfile:
     json.dump(edgeids,outfile)
