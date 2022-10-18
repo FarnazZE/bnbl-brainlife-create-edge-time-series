@@ -18,7 +18,7 @@ if(argCount > 1):
     configFilename = sys.argv[1]
 
 # Defining paths
-outputDirectory = "output/csv"
+#outputDirectory = "output/csv"
 
 if(not os.path.exists(outputDirectory)):
     os.makedirs(outputDirectory)
@@ -55,9 +55,6 @@ edgeids = {"edgeid"+str(e):edge for e,edge in enumerate(zip(columns[u],columns[v
 
 
 
-#np.savetxt('output/csv/edge_timeseries.csv',ets,delimiter=',') 
-#with open('output/label.json', 'w') as outfile:
-#    json.dump(edgeids,outfile)
 
 np.savetxt('output/timeseries.tsv.gz',ets,delimiter=',') 
 with open('output/label.json', 'w') as outfile:
