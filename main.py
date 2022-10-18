@@ -7,6 +7,7 @@ import os
 import sys
 from pathlib import Path
 import pandas as pd
+import csv
 
 
 
@@ -51,9 +52,14 @@ u,v = np.where(np.triu(np.ones(N),1))           # get edges
 ets = (z[:,u]*z[:,v])
 edgeids = {"edgeid"+str(e):edge for e,edge in enumerate(zip(columns[u],columns[v]))}
 
+<<<<<<< Updated upstream
 
-with open('timeseries.tsv', 'wt') as ets:
-    tsv_writer = csv.writer(ets, delimiter='\t',compression='gzip')
+
 #np.savetxt('output/csv/edge_timeseries.csv',ets,delimiter=',') 
 #with open('output/label.json', 'w') as outfile:
 #    json.dump(edgeids,outfile)
+=======
+np.savetxt('output/edge_timeseries.tsv.gz',ets,delimiter=',') 
+with open('output/label.json', 'w') as outfile:
+     outfile.write(json.dumps(edgeids))
+>>>>>>> Stashed changes
