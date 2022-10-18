@@ -18,7 +18,7 @@ if(argCount > 1):
     configFilename = sys.argv[1]
 
 # Defining paths
-#outputDirectory = "output/csv"
+outputDirectory = "output"
 
 if(not os.path.exists(outputDirectory)):
     os.makedirs(outputDirectory)
