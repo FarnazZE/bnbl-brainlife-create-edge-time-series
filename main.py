@@ -8,7 +8,6 @@ import sys
 from pathlib import Path
 import pandas as pd
 import csv
-import h5py
 
 
 
@@ -57,10 +56,10 @@ edgeids = {"edgeid"+str(e):edge for e,edge in enumerate(zip(columns[u],columns[v
 
 
 
-#np.savetxt('output/timeseries.tsv.gz',ets,delimiter=',') 
+np.savetxt('output/timeseries.tsv.gz',ets,delimiter=',',header=edgeids) 
 with open('output/label.json', 'w') as outfile:
      outfile.write(json.dumps(edgeids))
 
-with h5py.File('output/timeseries.hdf5', 'w') as f:
-    dset = f.create_dataset("default", data=ets)
+#with h5py.File('output/timeseries.hdf5', 'w') as f:
+#   dset = f.create_dataset("default", data=ets)
 
