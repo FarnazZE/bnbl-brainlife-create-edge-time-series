@@ -12,7 +12,7 @@ import csv
 
 
 # Choosing config file
-configFilename = "config-sample.json"
+configFilename = "config.json"
 argCount = len(sys.argv)
 if(argCount > 1):
     configFilename = sys.argv[1]
@@ -56,7 +56,9 @@ edgeids = {"edgeid"+str(e):edge for e,edge in enumerate(zip(columns[u],columns[v
 
 
 ets_pd = pd.DataFrame(ets, columns=[e for e,edge in enumerate(zip(columns[u],columns[v]))])
-np.savetxt('output/timeseries.tsv.gz',ets_pd,delimiter=',')
+compression_opts = dict(method='zip',
+                        archive_name='timeseries.tsv')  
+ets_pd.to_csv('output/timeseries.zip', compression=compression_opts)
 
 with open('output/timeseries.json', 'w') as outfile:
      outfile.write(json.dumps(edgeids))
