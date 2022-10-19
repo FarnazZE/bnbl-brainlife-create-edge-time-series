@@ -56,7 +56,7 @@ edgeids = {"edgeid"+str(e):edge for e,edge in enumerate(zip(columns[u],columns[v
 
 
 
-np.savetxt('output/timeseries.tsv.gz',ets,delimiter=',',header=edgeids) 
+np.savetxt('output/timeseries.tsv.gz',ets,delimiter=',',header=np.range(len(edgeids)) 
 with open('output/label.json', 'w') as outfile:
      outfile.write(json.dumps(edgeids))
 
