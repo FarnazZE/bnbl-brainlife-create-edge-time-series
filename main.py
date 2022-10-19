@@ -55,7 +55,7 @@ edgeids = {"edgeid"+str(e):edge for e,edge in enumerate(zip(columns[u],columns[v
 
 
 
-ets_pd = pd.DataFrame(ets, columns=np.arange(np.size(ets,1)))
+ets_pd = pd.DataFrame(ets, columns=[e for e,edge in enumerate(zip(columns[u],columns[v]))]))
 np.savetxt('output/timeseries.tsv.gz',ets_pd,delimiter=',')
 
 with open('output/label.json', 'w') as outfile:
