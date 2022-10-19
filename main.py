@@ -12,7 +12,7 @@ import csv
 
 
 # Choosing config file
-configFilename = "config.json"
+configFilename = "config-sample.json"
 argCount = len(sys.argv)
 if(argCount > 1):
     configFilename = sys.argv[1]
@@ -58,6 +58,6 @@ edgeids = {"edgeid"+str(e):edge for e,edge in enumerate(zip(columns[u],columns[v
 ets_pd = pd.DataFrame(ets, columns=[e for e,edge in enumerate(zip(columns[u],columns[v]))])
 np.savetxt('output/timeseries.tsv.gz',ets_pd,delimiter=',')
 
-with open('output/label.json', 'w') as outfile:
+with open('output/timeseries.json', 'w') as outfile:
      outfile.write(json.dumps(edgeids))
 
