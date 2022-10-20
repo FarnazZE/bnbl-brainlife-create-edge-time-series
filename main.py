@@ -35,7 +35,7 @@ print("Loading time series...")
 
 timeseriesFilename = config["tsv"]
 
-ts = pd.read_csv(timeseriesFilename,sep="\t")
+ts = pd.read_csv(timeseriesFilename,sep="\t").iloc[1:500,1:200]
 columns=ts.columns
 
 
