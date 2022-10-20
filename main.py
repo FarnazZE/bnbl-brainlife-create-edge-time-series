@@ -35,7 +35,7 @@ print("Loading time series...")
 
 timeseriesFilename = config["tsv"]
 
-ts = pd.read_csv(timeseriesFilename,sep="\t").iloc[1:500,1:200]
+ts = pd.read_csv(timeseriesFilename,sep="\t")
 columns=ts.columns
 
 
@@ -50,7 +50,7 @@ T, N= ts.shape
 u,v = np.where(np.triu(np.ones(N),1))           # get edges
 # element-wise prroduct of time series
 ets = (z[:,u]*z[:,v])
-edgeids = {"edgeid"+str(e):edge for e,edge in enumerate(zip(columns[u],columns[v]))}
+edgeids = [{"column_name":edge} for e,edge in enumerate(zip(columns[u],columns[v]))]
 
 
 
@@ -59,6 +59,7 @@ ets_pd = pd.DataFrame(ets, columns=[e for e,edge in enumerate(zip(columns[u],col
 ets_pd.to_csv('output/timeseries.tsv.gz',sep='\t', index=False,compression='gzip')
 
 
-with open('output/timeseries.json', 'w') as outfile:
-     outfile.write(json.dumps(edgeids))
+with open("output/timeseries.json", "w") as label_file:
+    json.dump(edgeids, label_file, indent=4)
+
 
