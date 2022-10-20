@@ -56,8 +56,7 @@ edgeids = {"edgeid"+str(e):edge for e,edge in enumerate(zip(columns[u],columns[v
 
 
 ets_pd = pd.DataFrame(ets, columns=[e for e,edge in enumerate(zip(columns[u],columns[v]))])
-with open('output/timeseries.tsv','w') as write_tsv:
-    write_tsv.write(ets_pd.to_csv(sep='\t', index=False))
+ets_pd.to_csv('output/timeseries.tsv',sep='\t', index=False)
 
 with open('output/timeseries.json', 'w') as outfile:
      outfile.write(json.dumps(edgeids))
